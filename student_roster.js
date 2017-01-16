@@ -130,6 +130,31 @@ class Student {
       })
     })
   }
+  static studentBirthday(){
+    db.serialize(function () {
+      db.each(`SELECT * FROM student WHERE strftime('%m', birthdate) = strftime('%m','now')`, function (err, row) {
+        if (err) {
+          console.log(err);
+        }else {
+          console.log(row);
+        }
+      })
+    })
+  }
+  static studentBirthdayList(){
+    db.serialize(function () {
+      db.each(`SELECT * FROM student ORDER BY birthdate ASC`, function (err, row) {
+        if (err) {
+          console.log(err);
+        }else {
+          console.log(row);
+        }
+      })
+    })
+  }
+  static help(){
+    console.log(`showStudent()\naddStudent(firstname, lastname, birthdate)\nupdateStudent(firstname, lastname, birthdate, id)\ndeleteStudent(id)\nfindByName(name)\nselectByAttr(fields) ex. [firstname, lastname, birthdate]\ngetBirthdayByThisMonth()\nsortBirthday()`)
+  }
 }
 
 var start = repl.start('> ').context
@@ -140,3 +165,6 @@ start.deleteData = Student.deleteData
 start.showData = Student.showData
 start.studentName = Student.studentName
 start.studentAttribut = Student.studentAttribut
+start.studentBirthday = Student.studentBirthday
+start.studentBirthdayList = Student.studentBirthdayList
+start.help = Student.help
