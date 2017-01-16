@@ -23,7 +23,6 @@ class Student{
       })
     })
   }
-
   static updateStudent(id, firstname, lastname, birthdate) {
     var UPDATE_STUDENT = "UPDATE student SET firstname = $firstname, lastname = $lastname, birthdate = $birthdate WHERE id = $id;";
     db.serialize(function() {
@@ -56,27 +55,86 @@ class Student{
     })
   }
   static readStudent() {
-    var READ_STUDENT = 
+    var READ_STUDENT = "SELECT * FROM student"
     db.serialize(function() {
-      db.run(CREATE_TABLE, function(err){
+      db.all(READ_STUDENT,function(err,rows){
         if (err){
           console.log(err);
         } else {
-          console.log('Create Table');
+          console.log(rows);
         }
       })
     })
   }
-  static findStudent(param) {
+  static findStudent(name) {
+    var FIND_STUDENT = "SELECT * FROM student WHERE firstname LIKE $name OR lastname LIKE $name;"
     db.serialize(function() {
-      db.run(CREATE_TABLE, function(err){
+      db.each(FIND_STUDENT,{
+        $name: name
+      }, function(err, rows){
         if (err){
           console.log(err);
         } else {
-          console.log('Create Table');
+          console.log(rows);
         }
       })
     })
+  }
+  static searchAttribute(attribute){
+    var SEARCH_STUDENT = `SELECT ${attribute} FROM student`
+    db.serialize(function(){
+      db.each(SEARCH_STUDENT, function(err, rows){
+        if (err){
+          console.log(err);
+        } else {
+          console.log(rows);
+        }
+      })
+    })
+  }
+  static thisMonthBirthday(){
+    var TODAY_BIRTHDAY = "SELECT * FROM student WHERE strftime('%m', birthdate) = strftime('%m', 'now')"
+    db.serialize(function(){
+      db.each(TODAY_BIRTHDAY, function(err, rows){
+        if (err){
+          console.log(err);
+        } else {
+          console.log(rows);
+        }
+      })
+    })
+  }
+  static sortByBirthday(){
+    var SORT_BIRTHDAY = "SELECT * FROM student ORDER BY strftime('%m, %d', birthdate);";
+    db.serialize(function(){
+      db.each(SORT_BIRTHDAY, function(err, rows){
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(rows);
+        }
+      })
+    })
+  }
+  static help(){
+    console.log('addStudent (firstname, lastname, birthdate)');
+    console.log('updateStudent(id, firstname, lastname, birthdate)');
+    console.log('deleteStudent (id)');
+    console.log('readStudent()');
+    console.log('findStudent(name)');
+    console.log('searchAttribute(attribute)');
+    console.log('thisMonthBirthday()');
+    console.log('sortByBirthday()');
+    console.log('help()');
   }
 }
-Student.deleteStudent(3)
+var repled = repl.start('> ').context
+repled.addStudent = Student.addStudent
+repled.updateStudent = Student.updateStudent
+repled.deleteStudent = Student.deleteStudent
+repled.readStudent = Student.readStudent
+repled.findStudent = Student.findStudent
+repled.searchAttribute = Student.searchAttribute
+repled.thisMonthBrithday = Student.thisMonthBrithday
+repled.sortByBirthday = Student.sortByBirthday
+repled.help = Student.help
