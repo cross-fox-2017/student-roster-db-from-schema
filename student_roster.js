@@ -27,16 +27,16 @@ class Student{
   addStudent(firstname, lastname, birthdate){
     let addDataStudent = `INSERT INTO student (firstname, lastname, birthdate) VALUES ($firstname,$lastname,$birthdate);`;
       db.serialize(function() {
-        db.run(addDataStudent, {
+        db.each(addDataStudent, {
           $firstname : firstname,
           $lastname  : lastname,
           $birthdate : birthdate
         },
-        function(err) {
+        function(err, row) {
         if(err) {
           console.log(err);
         } else {
-          console.log('addDataStudent');
+          console.log(row);
         }
       });
     });
@@ -52,11 +52,11 @@ class Student{
           $birthdate : birthdate,
           $id        : id
         },
-        function(err) {
+        function(err, row) {
         if(err) {
           console.log(err);
         } else {
-          console.log('updateDataStudent');
+          console.log(row);
         }
       });
     });
@@ -69,11 +69,11 @@ class Student{
         db.each(deleteDataStudent, {
           $id : id
         },
-        function(err) {
+        function(err, row) {
         if(err) {
           console.log(err);
         } else {
-          console.log('deleteDataStudent');
+          console.log(row);
         }
       });
     });
@@ -87,11 +87,11 @@ class Student{
           $firstname : firstname,
           $lastname : lastname,
         },
-      function(err) {
+      function(err, row) {
         if(err) {
           console.log(err);
         } else {
-          console.log('findDataStudent');
+          console.log(row);
         }
       });
     });
@@ -141,6 +141,18 @@ class Student{
       });
     });
   }
+
+  // MENU HELP Data Student
+  help(){
+    console.log('> showStudent()');
+    console.log('> addStudent(firstname,lastname,birthdate,id)');
+    console.log('> updateStudent(firstname,lastname,birthdate,id)');
+    console.log('> deleteStudent(id)');
+    console.log('> findByName(firstname,lastname)');
+    console.log('> selectByAttr(attribute)');
+    console.log('> getBirthdayByThisMonth()');
+    console.log('> sortBirthday()');
+  }
 }
 
 let command = repl.start("> ")
@@ -154,3 +166,4 @@ command.context.findByName             = result.findByName;
 command.context.selectByAttr           = result.selectByAttr;
 command.context.getBirthdayByThisMonth = result.getBirthdayByThisMonth;
 command.context.sortBirthday           = result.sortBirthday;
+command.context.help                   = result.help;
