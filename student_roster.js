@@ -116,7 +116,7 @@ class Students{
 
   static sortBirthday(){
     db.serialize(function(){
-      db.each(`SELECT * FROM student ORDER BY strftime('%m',birthdate) `,function(err,row){
+      db.each(`SELECT * FROM student ORDER BY strftime('%m , %d',birthdate) `,function(err,row){
         if(err){
           console.log(err);
         } else{
