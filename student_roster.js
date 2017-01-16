@@ -139,6 +139,17 @@ class Students {
       });
   }
 
+  help(){
+    console.log("> addStudents(firstname,lastname,birthdate)");
+    console.log("> showStudents()");
+    console.log("> updateStudents(firstname,lastname,birthdate,id)");
+    console.log("> deleteStudents(id)");
+    console.log("> findByName(firstname,lastname)");
+    console.log("> selectByAttr(attribute)");
+    console.log("> getBirthdayByThisMonth()");
+    console.log("> sortBirthday");
+  }
+
 }
 
 
@@ -154,3 +165,4 @@ command.context.findByName = student.findByName;
 command.context.selectByAttr = student.selectByAttr;
 command.context.getBirthdayByThisMonth = student.getBirthdayByThisMonth;
 command.context.sortBirthday = student.sortBirthday;
+command.context.help = student.help;
