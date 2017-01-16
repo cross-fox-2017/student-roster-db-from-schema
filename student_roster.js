@@ -11,6 +11,7 @@ let ADD_DATA = "INSERT INTO student(firstname, lastname, birthdate) VALUES ($fir
 let UPDATE_DATA = "UPDATE student SET firstname = $firstname, lastname = $lastname, birthdate = $birthdate WHERE id = $id";
 let DELETE_DATA = "DELETE FROM student WHERE id = $id";
 let SHOW_DATA = "SELECT * FROM student ";
+let STUDENT_NAME = "SELECT * FROM student WHERE firstname = $name OR lastname = $name";
 // write your code here
 class Student {
 
@@ -100,6 +101,30 @@ class Student {
         if (err) {
           console.log(err);
         }else {
+          console.log(`${row.id} ${row.firstname} ${row.lastname} ${row.birthdate}`);
+        }
+      })
+    })
+  }
+  static studentName(name){
+    db.serialize(function () {
+      db.each(STUDENT_NAME,{
+        $name: name
+      }, function(err, row) {
+        if (err) {
+          console.log(err);
+        }else {
+          console.log(`${row.id} ${row.firstname} ${row.lastname}`);
+        }
+      })
+    })
+  }
+  static studentAttribut(attr){
+    db.serialize(function () {
+      db.each(`SELECT ${attr} FROM student `, function (err, row) {
+        if (err) {
+          console.log(err);
+        }else {
           console.log(row);
         }
       })
@@ -113,3 +138,5 @@ start.addData = Student.addData
 start.updateData = Student.updateData
 start.deleteData = Student.deleteData
 start.showData = Student.showData
+start.studentName = Student.studentName
+start.studentAttribut = Student.studentAttribut
