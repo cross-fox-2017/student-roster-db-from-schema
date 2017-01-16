@@ -12,8 +12,6 @@ let UPDATE_DATA = "UPDATE student SET firstname=$firstname,lastname=$lastname,bi
 let DELETE_DATA ="DELETE FROM student WHERE id = $id"
 let SHOW_DATA ="SELECT * FROM student"
 let SEARCH_NAME = "SELECT * FROM student WHERE firstname=$name OR lastname=$name"
-var d= new Date()
-var m= d.getMonth()
 
 class Students{
 
