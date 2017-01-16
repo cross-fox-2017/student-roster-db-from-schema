@@ -24,7 +24,8 @@ class Student{
     console.log(`find_data('kata_kunci') ----> Menampilkan data berdasarkan kata_kunci`)
     console.log(`birthday_this_month() ----> Menampilkan nama-nama yang berulang tahun bulan ini`)
     console.log(`sort_by_birthday() ----> Menampilkan data secara berurutan berdasarkan bulan kelahiran`)
-    console.log(`help() ----> Menu help`)
+    console.log(`update_data('Nama_Depan', 'Nama_Belakang', 'Tanggal_Lahir(YYYY-MM-DD)',id) ----> merubah/mengganti data yang sudah ada berdasarkan id`)
+    console.log(`help() ----> Menu bantuan`)
   }
 
   createTable(){
@@ -159,6 +160,24 @@ class Student{
     })
     return true
   }
+
+  updateData(firstname, lastname, birthdate, id){
+
+    var updatedData = `UPDATE student SET firstname = '${firstname}', lastname = '${lastname}', birthdate = '${birthdate}' WHERE id = '${id}';`;
+    //console.log(`Nama-nama yang berulang tahun di bulan ini :`)
+    db.serialize(function() {
+      db.run(updatedData, function (err) {
+        if (err) {
+          console.log(err);
+        }
+        else {
+          console.log('Data berhasil dirubah');
+        }
+      })
+    })
+    return true
+  }
+
 }
 
 var studentData = new Student()
@@ -175,4 +194,5 @@ start.context.find_data = studentData.selectByAttr
 start.context.birthday_this_month = studentData.getBirthdayByThisMonth
 start.context.sort_by_birthday = studentData.sortBirthday
 start.context.help = studentData.helpMenu
+start.context.update_data = studentData.updateData
 //start.context.seedData = seedData
