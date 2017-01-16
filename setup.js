@@ -8,7 +8,7 @@ var file = 'student.db';
 var db = new sqlite.Database(file)
 
 var CREATE_TABLE = "CREATE TABLE IF NOT EXISTS student(id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT NOT NULL, lastname TEXT, birthdate DATE)"
-var SEED_DATA = "INSERT INTO student(firstname, lastname, birthdate) VALUES ('Rubi','Henjaya','1986-11-20'), ('Riza','Fahmi','1983-12-3')"
+var SEED_DATA = "INSERT INTO student(firstname, lastname, birthdate) VALUES ('dia','Henjaya','1986-11-20'), ('Riza','Fahmi','1983-12-3')"
 
 let createTable = () =>{
   db.serialize(function(){
@@ -20,6 +20,7 @@ let createTable = () =>{
       }
     })
   })
+    return true;
 }
 
 let seedData = () =>{
@@ -32,6 +33,7 @@ let seedData = () =>{
       }
     })
   })
+  return true;
 }
 
 var start = repl.start('> ')
