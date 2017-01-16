@@ -135,6 +135,6 @@ repled.deleteStudent = Student.deleteStudent
 repled.readStudent = Student.readStudent
 repled.findStudent = Student.findStudent
 repled.searchAttribute = Student.searchAttribute
-repled.thisMonthBrithday = Student.thisMonthBrithday
+repled.thisMonthBirthday = Student.thisMonthBirthday
 repled.sortByBirthday = Student.sortByBirthday
 repled.help = Student.help
