@@ -13,7 +13,7 @@ class Student{
     let showDataStudent = `SELECT * FROM student;`;
       db.serialize(function() {
         db.all(showDataStudent,
-      function(err, row) {
+        function(err, row) {
         if(err) {
           console.log(err);
         } else {
@@ -32,7 +32,7 @@ class Student{
           $lastname  : lastname,
           $birthdate : birthdate
         },
-      function(err) {
+        function(err) {
         if(err) {
           console.log(err);
         } else {
@@ -52,7 +52,7 @@ class Student{
           $birthdate : birthdate,
           $id        : id
         },
-      function(err) {
+        function(err) {
         if(err) {
           console.log(err);
         } else {
@@ -69,11 +69,11 @@ class Student{
         db.each(deleteDataStudent, {
           $id : id
         },
-      function(err) {
+        function(err) {
         if(err) {
           console.log(err);
         } else {
-          console.log('delteDataStudent');
+          console.log('deleteDataStudent');
         }
       });
     });
@@ -101,7 +101,8 @@ class Student{
   selectByAttr(fields){
     let selectAttrStudent = `SELECT ${fields} FROM student;`;
       db.serialize(function() {
-        db.each(selectAttrStudent, function(err, row) {
+        db.each(selectAttrStudent,
+          function(err, row) {
           if(err) {
             console.log(err);
           } else {
@@ -115,7 +116,8 @@ class Student{
   getBirthdayByThisMonth(month){
     let getBirthMonthStudent = `SELECT * FROM student WHERE strftime('%m', birthdate) = strftime('%m', 'now');`;
       db.serialize(function() {
-        db.each(getBirthMonthStudent, function(err, row) {
+        db.each(getBirthMonthStudent,
+          function(err, row) {
           if(err) {
             console.log(err);
           } else {
@@ -129,7 +131,8 @@ class Student{
   sortBirthday(){
     let getBirthMonthStudent = `SELECT * FROM student ORDER BY birthdate ASC;`;
       db.serialize(function() {
-        db.each(getBirthMonthStudent, function(err, row) {
+        db.each(getBirthMonthStudent,
+          function(err, row) {
           if(err) {
             console.log(err);
           } else {
