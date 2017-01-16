@@ -133,7 +133,7 @@ class Student {
   }
 
   static help () {
-    let show = `showStudent ()\naddStudent (firstname, lastname, birthdate)\nupdateStudent (id, attribute, value)\ndeleteStudent (id)\nfindName (name)\nfindAttribute (attribute)\nfindBirthdayByMonth (month)\nsortBirthday ()\nhelp ()`;
+    let show = `showStudent ()\naddStudent (firstname, lastname, birthdate)\nupdateStudent (id, attribute, value)\ndeleteStudent (id)\nfindName (name)\nfindAttribute (attribute)\nfindBirthdayByThisMonth ()\nsortBirthday ()\nhelp ()`;
     console.log(show);
   }
 }
