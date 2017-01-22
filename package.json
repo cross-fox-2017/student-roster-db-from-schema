@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/cross-fox-2017/student-roster-db-from-schema/issues"
   },
-  "homepage": "https://github.com/cross-fox-2017/student-roster-db-from-schema#readme"
+  "homepage": "https://github.com/cross-fox-2017/student-roster-db-from-schema#readme",
+  "dependencies": {
+    "sqlite3": "^3.1.8"
+  }
 }
