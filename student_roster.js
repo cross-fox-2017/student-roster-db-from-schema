@@ -83,7 +83,7 @@ class Student {
       })
     })
   }
-  static showData(){
+  static showStudent(){
     db.serialize(function() {
       // db.run(SHOW_DATA,{
       //   $id: id,
@@ -162,7 +162,7 @@ var start = repl.start('> ').context
 start.addData = Student.addData
 start.updateData = Student.updateData
 start.deleteData = Student.deleteData
-start.showData = Student.showData
+start.showStudent = Student.showStudent
 start.studentName = Student.studentName
 start.studentAttribut = Student.studentAttribut
 start.studentBirthday = Student.studentBirthday

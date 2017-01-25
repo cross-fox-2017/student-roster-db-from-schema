@@ -35,5 +35,7 @@ let seedData = () => {
   })
 }
 
-repl.start('> ').context.createTable = createTable
-repl.start('> ').context.seedData = seedData
+var rep = repl.start('> ').context
+
+rep.createTable = createTable
+rep.seedData = seedData
